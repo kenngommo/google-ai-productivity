@@ -1,3 +1,4 @@
+// Build trigger comment to force new deployment commit
 import { useRef, useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
 import Navbar from './components/Navbar';
