@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import { useLanguage } from './context/LanguageContext';
 
 function App() {
+  console.log("GeminiFlow Landing Page v1.0.1");
   const contactRef = useRef<HTMLDivElement>(null);
   const [contactIntent, setContactIntent] = useState<'buy' | 'zalo' | 'email'>('buy');
   const [contactRole, setContactRole] = useState<string>('opt1');
