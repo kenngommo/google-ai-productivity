@@ -258,7 +258,7 @@ export default function Affiliate() {
                 <span>Affiliate Price Tracker & Auto Scraper</span>
               </div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold tracking-tight">
-                Săn Deal <span className="bg-gradient-to-r from-google-blue via-blue-400 to-sky-300 bg-clip-text text-transparent">Affiliate</span> & Lịch Sử Giá
+                Săn Deal & <span className="bg-gradient-to-r from-google-blue via-blue-400 to-sky-300 bg-clip-text text-transparent">Lịch sử giá</span>
               </h1>
               <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
                 Tự động đồng bộ dữ liệu từ Google Sheet, cào ảnh từ Shopee, TikTok Shop, Lazada và ghi nhận biến động giá mỗi 1 tiếng.
@@ -267,9 +267,8 @@ export default function Affiliate() {
           </div>
         </div>
 
-        {/* Sync & Admin Control Bar (Only for owner/admin) */}
-        {isAdmin && (
-          <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 backdrop-blur-md">
+        {/* Sync Control Bar */}
+        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 backdrop-blur-md">
             {/* Status info */}
             <div className="flex items-center space-x-3 text-xs sm:text-sm text-slate-300">
               <span className="relative flex h-3 w-3">
@@ -284,8 +283,9 @@ export default function Affiliate() {
               </span>
             </div>
 
-            {/* Action buttons */}
-            <div className="flex flex-wrap items-center gap-2.5">
+            {/* Action buttons (Only for owner/admin) */}
+            {isAdmin && (
+              <div className="flex flex-wrap items-center gap-2.5">
               <button
                 onClick={handleScrapePrices}
                 disabled={isScraping || isSyncing}
@@ -320,8 +320,8 @@ export default function Affiliate() {
                 Đặt lại mẫu
               </button>
             </div>
-          </div>
-        )}
+          )}
+        </div>
 
         {/* Sync notification toast */}
         {syncNotice && (
