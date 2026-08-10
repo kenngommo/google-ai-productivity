@@ -6,6 +6,7 @@ export const translations = {
     navOffers: 'Gói dịch vụ',
     navResources: 'Tài liệu miễn phí',
     navLaptop: 'Laptop US',
+    navAffiliate: 'Săn Deal Affiliate',
     btnGetStarted: 'Bắt đầu',
     btnBookFree: 'Đăng ký tư vấn miễn phí',
 
@@ -240,6 +241,7 @@ Thiết lập các quy trình tiêu chuẩn để sử dụng Gemini trong Googl
     navOffers: 'Offers',
     navResources: 'Free Resources',
     navLaptop: 'Laptop US',
+    navAffiliate: 'Affiliate Deals',
     btnGetStarted: 'Get Started',
     btnBookFree: 'Book Free Consultation',
 

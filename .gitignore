@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Chrome Temp Profile
+scripts/chrome_temp_profile/

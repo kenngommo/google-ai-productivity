@@ -8,6 +8,7 @@ import Services from './components/Services';
 import ProOffers from './components/ProOffers';
 import Resources from './components/Resources';
 import LaptopSection from './components/Laptop';
+import Affiliate from './components/Affiliate';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { useLanguage } from './context/LanguageContext';
@@ -73,7 +74,7 @@ function App() {
     const handleHashChange = () => {
       const hash = window.location.hash;
       setCurrentHash(hash);
-      if (hash === '#/laptop-us' || hash === '#' || !hash) {
+      if (hash === '#/laptop-us' || hash === '#/affiliate' || hash === '#' || !hash) {
         window.scrollTo(0, 0);
       }
     };
@@ -83,7 +84,7 @@ function App() {
 
   // Smooth scroll to section anchors after route switch
   useEffect(() => {
-    if (currentHash && currentHash !== '#/laptop-us') {
+    if (currentHash && currentHash !== '#/laptop-us' && currentHash !== '#/affiliate') {
       const id = currentHash.replace('#', '');
       if (id) {
         const el = document.getElementById(id);
@@ -153,6 +154,21 @@ function App() {
               window.open(zaloHref, '_blank');
             }}
           />
+        </main>
+        <Footer />
+        <BackTopBtn />
+        <ZaloBtn />
+      </div>
+    );
+  }
+
+  // ── Dedicated Affiliate Landing Page ──────────────────────────────────────
+  if (currentHash === '#/affiliate') {
+    return (
+      <div className="relative min-h-screen bg-slate-950 text-slate-100 selection:bg-blue-600/35 selection:text-white">
+        <Navbar onContactClick={() => scrollToContact()} />
+        <main>
+          <Affiliate />
         </main>
         <Footer />
         <BackTopBtn />

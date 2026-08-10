@@ -1,0 +1,56 @@
+name: Scheduled Scrape & Deploy
+
+on:
+  schedule:
+    # Runs every 12 hours (at 00:00 and 12:00 UTC)
+    - cron: '0 */12 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions Console
+
+permissions:
+  contents: write
+
+jobs:
+  scrape-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Scraper
+        # Run only if the SCRAPER_API_KEY secret is configured on the repository
+        if: "${{ secrets.SCRAPER_API_KEY != '' }}"
+        env:
+          SCRAPER_API_KEY: ${{ secrets.SCRAPER_API_KEY }}
+        run: node scripts/scrape-shopee-real.cjs
+
+      - name: Check if database changed
+        id: git-check
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/affiliate-db.json
+          if git diff --cached --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No price updates found."
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Prices updated. Committing changes..."
+            git commit -m "Auto-update prices via cloud scraper"
+            git push
+          fi
+
+      - name: Compile and Deploy
+        # Trigger deployment if prices changed OR if manually run
+        if: steps.git-check.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        run: |
+          npm run build
+          npx gh-pages -d dist --repo https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git --user "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"

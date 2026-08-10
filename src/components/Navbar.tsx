@@ -29,6 +29,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
     { name: t('navOffers'), href: '#offers' },
     { name: t('navResources'), href: '#resources' },
     { name: t('navLaptop'), href: '#/laptop-us' },
+    { name: t('navAffiliate'), href: '#/affiliate' },
   ];
 
   return (
