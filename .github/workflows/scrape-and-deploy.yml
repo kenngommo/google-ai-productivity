@@ -1,9 +1,6 @@
-name: Scheduled Scrape & Deploy
+name: Scrape & Deploy (Manual Trigger)
 
 on:
-  schedule:
-    # Runs every 12 hours (at 00:00 and 12:00 UTC)
-    - cron: '0 */12 * * *'
   workflow_dispatch: # Allows manual trigger from GitHub Actions Console
 
 permissions:
